@@ -6,6 +6,8 @@ import CommonLayout from 'layouts/CommonLayout';
 import ListDemo from 'components/ListDemo';
 
 import withoutAuth from './withoutAuth';
+import Login from 'components/Authentication/Login';
+import withAuth from './withAuth';
 
 const routes = mount({
   '*': withView(
@@ -13,9 +15,14 @@ const routes = mount({
       <View />
     </CommonLayout>,
     mount({
-      '/': withoutAuth(
+      '/': withAuth(
         route({
           view: <ListDemo />,
+        })
+      ),
+      '/signin': withoutAuth(
+        route({
+          view: <Login />,
         })
       ),
     })
