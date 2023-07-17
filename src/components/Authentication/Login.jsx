@@ -8,8 +8,10 @@ import { authService } from 'service/AuthService';
 import randomToken from 'random-token';
 
 const loginSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid email').required('Required'),
-  password: Yup.string().min(8, 'Minimum 8 characters').required('Required!'),
+  email: Yup.string().email('Invalid email').required('Enter your email!'),
+  password: Yup.string()
+    .min(8, 'Minimum 8 characters')
+    .required('Enter your password!'),
 });
 
 const Login = () => {
@@ -18,6 +20,7 @@ const Login = () => {
     dispatch(getUsers());
   }, [dispatch]);
   const { usersReducer } = useSelector((state) => state);
+  const { loginReducer } = useSelector((state) => state);
   const handleLogin = (values) => {
     var token = randomToken(16);
     const existedUser = usersReducer.users.find(
@@ -33,10 +36,9 @@ const Login = () => {
   return (
     <Wrapper>
       <h1>Login</h1>
+      {loginReducer.error ? <div>{loginReducer.error}</div> : null}
       <Formik
         initialValues={{
-          uid: '',
-          token: '',
           email: '',
           password: '',
         }}
@@ -45,7 +47,6 @@ const Login = () => {
       >
         {({ values, errors, touched }) => (
           <Form>
-            <div>{errors.email}</div>
             <Field name="email" type="email" values={values.email} />
             {errors.email && touched.email ? <div>{errors.email}</div> : null}
             <Field name="password" type="password" values={values.password} />

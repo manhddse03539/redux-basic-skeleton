@@ -19,6 +19,11 @@ export const loginFailed = (error) => ({
   payload: { error },
 });
 
+export const logout = () => ({
+  type: 'LOGOUT',
+  payload: '',
+});
+
 const getAllUserSuccess = (users) => ({
   type: 'GET_USERS_SUCCESS',
   users,
