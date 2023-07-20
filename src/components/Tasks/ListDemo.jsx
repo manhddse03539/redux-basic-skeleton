@@ -7,6 +7,8 @@ import { I18nContext } from 'context/i18n';
 import { authService } from 'service/AuthService';
 import { logout } from 'actions/auth';
 import { Link } from 'react-navi';
+import { ButtonSample } from 'components/atoms/Button';
+import { Small } from 'components/atoms/Button/ButtonSample.stories';
 
 const ListDemo = (props) => {
   const currentUser = authService.getCurrentUser();
@@ -45,9 +47,11 @@ const ListDemo = (props) => {
             </li>
           ))}
       </ul>
-      <button onClick={() => (window.location.href = '/list/new')}>
-        Add new task
-      </button>
+      <ButtonSample
+        size="small"
+        label="Add new task"
+        onClick={() => (window.location.href = '/list/new')}
+      />
       <button onClick={() => handleLogout()}>Logout</button>
     </>
   );
