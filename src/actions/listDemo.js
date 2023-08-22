@@ -33,6 +33,19 @@ export const addTask = (task) => {
   };
 };
 
+export const editTask = (task) => {
+  return (dispatch) => {
+    listApi
+      .edit(task)
+      .then((response) => {
+        dispatch(editTaskSuccess(response.data));
+      })
+      .catch((error) => {
+        dispatch(editTaskFailed(error));
+      });
+  };
+};
+
 export const deleteTask = (task) => {
   return (dispatch) => {
     listApi
@@ -74,6 +87,16 @@ const addTaskSuccess = (taskAdded) => ({
 const addTaskFailed = (error) => ({
   type: 'ADD_TASK_FAILED',
   payload: { error },
+});
+
+const editTaskSuccess = (taskEdited) => ({
+  type: 'EDIT_TASK_SUCCESS',
+  taskEdited,
+});
+
+const editTaskFailed = (taskEdited) => ({
+  type: 'EDIT_TASK_FAILED',
+  taskEdited,
 });
 
 const deleteTaskSuccess = (taskDeleted) => ({

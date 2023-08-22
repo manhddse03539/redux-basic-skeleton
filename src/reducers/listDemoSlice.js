@@ -24,6 +24,12 @@ const listReducer = (state = intinialState, action) => {
     case 'ADD_TASK_FAILED': {
       return { error: action.error };
     }
+    case 'EDIT_TASK_SUCCESS': {
+      return { taskEdited: action.taskEdited };
+    }
+    case 'EDIT_TASK_FAILED': {
+      return { error: action.error };
+    }
     case 'DELETE_TASK_SUCCESS': {
       return { taskDeleted: action.taskDeleted };
     }

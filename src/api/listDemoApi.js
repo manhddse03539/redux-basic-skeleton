@@ -10,9 +10,13 @@ export const listApi = {
     const url = `/list/${id}`;
     return request.get(url);
   },
-  add: (task) => {
+  add: (title) => {
     const url = '/list';
-    return request.post(url, { title: task.title });
+    return request.post(url, { title: title });
+  },
+  edit: (task) => {
+    const url = `/list/${task.id}`;
+    return request.put(url, { title: task.title });
   },
   delete: (task) => {
     const url = `/list/${task.id}`;

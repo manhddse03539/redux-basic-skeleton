@@ -9,7 +9,7 @@ import withoutAuth from './withoutAuth';
 import Login from 'components/Authentication/Login';
 import withAuth from './withAuth';
 import TaskDetail from 'components/Tasks/TaskDetail';
-import AddForm from 'components/Tasks/AddForm';
+import MainForm from 'components/Tasks/MainForm';
 
 const routes = mount({
   '*': withView(
@@ -32,9 +32,14 @@ const routes = mount({
           view: <TaskDetail task={request.params} />,
         }))
       ),
+      '/edit/:id': withAuth(
+        route((request) => ({
+          view: <MainForm formType="edit" task={request.params} />,
+        }))
+      ),
       '/list/new': withAuth(
         route({
-          view: <AddForm />,
+          view: <MainForm />,
         })
       ),
     })
